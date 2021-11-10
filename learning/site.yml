@@ -1,0 +1,26 @@
+- hosts: all
+  become: true
+  # tasks that should be run first or before all other tasks
+  pre_tasks:
+  - name: install updates on ubuntu
+    apt:
+      upgrade: yes
+      update_cache: yes
+# installs apache and php packages regardless of OS 
+- hosts: webservers
+  become: true
+  tasks:
+  - name: install apache and php packages
+    package:
+      name: 
+        - "{{ apache_package }}"
+        - "{{ php_package }}"
+      state: latest
+
+- hosts: db_servers
+  become: true
+  tasks:
+  - name: install mariadb package
+    package:
+      name: "{{ maria_db_package }}"
+      state: latest
