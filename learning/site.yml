@@ -7,6 +7,24 @@
     package:
       upgrade: yes
       update_cache: yes
+# adding terraform to the workstation(db)
+# only for practice purposes do not do this irl
+- hosts: workstations
+  become: true
+  tags: workstation
+  tasks:
+  - name: install unzip
+    package:
+      name: unzip
+  - name:
+    unarchive:
+      src: https://releases.hashicorp.com/terraform/1.0.10/terraform_1.0.10_linux_amd64.zip
+      dest: /usr/local/bin
+      remote_src: yes
+      mode: 0755
+      owner: alex
+      group: alex
+
 # installs apache and php packages regardless of OS 
 - hosts: webservers
   become: true
