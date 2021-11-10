@@ -2,8 +2,9 @@
   become: true
   # tasks that should be run first or before all other tasks
   pre_tasks:
-  - name: install updates on ubuntu
-    apt:
+  - name: install updates
+    tags: always
+    package:
       upgrade: yes
       update_cache: yes
 # installs apache and php packages regardless of OS 
@@ -11,6 +12,7 @@
   become: true
   tasks:
   - name: install apache and php packages
+    tags: apache,apache2,php
     package:
       name: 
         - "{{ apache_package }}"
@@ -21,6 +23,7 @@
   become: true
   tasks:
   - name: install mariadb package
+    tags: db,mariadb,maria
     package:
       name: "{{ maria_db_package }}"
       state: latest
