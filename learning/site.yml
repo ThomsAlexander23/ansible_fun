@@ -1,6 +1,6 @@
 - hosts: all
   become: true
-  # tasks that should be run first or before all other tasks
+# tasks that should be run first or before all other tasks
   pre_tasks:
   - name: install updates
     tags: always
@@ -18,7 +18,7 @@
         - "{{ apache_package }}"
         - "{{ php_package }}"
       state: latest
-
+# copies machine file and distributes to webserver
   - name: copy default html file for site
     tags: html
     copy:
@@ -27,7 +27,7 @@
       owner: alex
       group: alex
       mode: 0644
-
+# installs database 
 - hosts: db_servers
   become: true
   tasks:
